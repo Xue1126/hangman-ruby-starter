@@ -5,5 +5,16 @@ Bundler.require
 
 require File.expand_path("../../lib/hangman", __FILE__)
 
+a = []
+for b in 1..10 do
+  a << b
+end
+print a
+
+puts a.sample
+
+
+
+
 game = Hangman.new
-game.play!
+game.play

@@ -7,6 +7,10 @@ class RandomWord
     @word = WORDS.sample
   end
 
+  def word_length
+    return @word.length
+  end
+
   def positions_for(characters: [])
     # for you to implement :)
   end
