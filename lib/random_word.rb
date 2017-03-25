@@ -1,8 +1,8 @@
 class RandomWord
   attr_reader :word
 
-  # WORDS = %w(programming monkeybusiness rubyesque styleguide kip)
-  WORDS = %w(kippen)
+   WORDS = %w(programming monkeybusiness rubyesque styleguide kip)
+
 
   # choose one random word from the list
   def initialize
@@ -26,5 +26,12 @@ class RandomWord
       end
     end
   return positions
+  end
+
+  def is_this_word_correct?(try_word)
+    if try_word.join("") == @word
+      return true
+    end
+    return false
   end
 end

@@ -16,15 +16,18 @@ class Hangman
   def play
     # puts "Hi from lib/hangman.rb!"
     show_game
-    letter = ask_letter
-    check_letter(letter)
+    while ! game_over?
+      letter = ask_letter
+      check_letter(letter)
+      show_game
+    end
   end
 
   # this shows the current state of the game on the terminal
   ## puts ["red", "blue", "yellow"].join(", ")
   def show_game
-    puts @guesesses_positions.join(" ") + "\n"
-    puts @bad_guesses_list.join(" ") + "\n"
+    print @guesesses_positions.join(" ") + "    ||    "
+    print @bad_guesses_list.join(" ") + "\n"
 
   end
 
@@ -46,9 +49,31 @@ class Hangman
 
   # check whether a letter is correct (and where) or incorrect
   def check_letter(letterx)
-    # puts 'checking letter', letterx
-    is_correct = false
+    # puts 'checking letter', letter
     positions = @random_word.positions_for(letterx)
-    print positions
+    if positions.length > 0
+
+      # print positions
+      for pos in positions
+        # puts pos
+        @guesesses_positions[pos] = letterx
+      end
+    else
+      @bad_guesses_list << letterx
+    end
+  end
+
+
+  def game_over?
+    if @bad_guesses_list.length >= 10
+      puts "You've been hanged for bad spelling."
+      return true
+    end
+    if @random_word.is_this_word_correct?(@guesesses_positions)
+      puts "You won."
+      return true
+    end
+    return false
   end
 end
+
